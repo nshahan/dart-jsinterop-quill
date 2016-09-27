@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>WYSIWYG Demo - trix</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+  		<link rel="stylesheet" type="text/css" href="trix/dist/trix.css">
+		<script type="text/javascript" src="trix/dist/trix.js"></script>
+	
+	</head>
+
+
+	<body>Captain's Log
+		<input id="newEntry" type="hidden" name="content">
+		<trix-editor input="newEntry"></trix-editor>
+		<button id="save" onclick="store()">Save to Memory Banks</button>
+		<div id="fullLog"></div>
+	</body>
+
+	<script type="text/javascript">
+		var element = document.querySelector("trix-editor")
+		element.editor.setSelectedRange([0, 0])
+		element.editor.insertString("Hello")
+
+
+		function store() {
+			var newLogEntry = document.getElementById("newEntry").value;
+			localStorage.setItem("logEntry", newLogEntry);
+			document.getElementById("fullLog").innerHTML = newLogEntry;
+			
+		}
+	</script>
+</html>
