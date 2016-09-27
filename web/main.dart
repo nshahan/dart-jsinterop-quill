@@ -52,5 +52,5 @@ HtmlElement generateStardateHeading() {
 
 void loadPreviousEntries() {
   Element logElement = document.getElementById('log');
-  logElement.innerHtml = window.localStorage['log'];
+  logElement.innerHtml = window.localStorage['log'] ?? '';
 }
