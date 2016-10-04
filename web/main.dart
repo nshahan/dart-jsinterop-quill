@@ -6,14 +6,14 @@ import 'dart:html';
 final int secondsInAYear = 31536000;
 final String prompt = 'Something happened. Make is sound puzzeling and heroic.';
 final List<String> templates = [
-  'We have encountered what appeared to be a <insert space anomoly>. It has '
-  'proven to be sentient and has taken control of our ship. Thusfar, all efforts '
-  'at communication thusfar have failed...',
+  'We have encountered what appeared to be a <insert space anomaly>. It has '
+  'proven to be sentient and has taken control of our ship. Thus far, all efforts '
+  'at communication have failed...',
   'A warship from the <insert hostile alien organization> has entered our '
-  'territory. It is currently speeding towards Earth. Thusfar, all efforts at '
+  'territory. It is currently speeding towards Earth. Thus far, all efforts at '
   'peace have failed...',
-  'The ship has been pulled into a <insert type of time distorion>. We are '
-  'observing the universe in the distant <past or future>. Thusfar, all efforts '
+  'The ship has been pulled into a <insert type of time distortion>. We are '
+  'observing the universe in the distant <past or future>. Thus far, all efforts '
   'to return to our timeline have failed...'];
 
 QUILL.QuillStatic quillEditor;
@@ -29,7 +29,8 @@ main() {
 
   // listeners
   document.getElementById('save').onClick.listen(saveLog);
-  document.getElementById('templateSelect').onClick.listen(useTemplate);
+  SelectElement foo = document.getElementById('templateSelect');
+  foo.onChange.listen(useTemplate);
 
 }
 
