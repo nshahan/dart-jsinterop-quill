@@ -1,28 +1,29 @@
-import 'quill.dart' as QUILL;
+import 'quill.dart' as quill;
 
 import 'dart:html';
 
 // ignoring leap years
 final int secondsInAYear = 31536000;
-final String prompt = 'Something happened. Make is sound puzzeling and heroic.';
+final String prompt = 'Something happened. Make it sound puzzling and heroic.';
 final List<String> templates = [
-  'We have encountered what appeared to be a <insert space anomaly>. It has '
-  'proven to be sentient and has taken control of our ship. Thus far, all efforts '
-  'at communication have failed...',
+  'We encountered what appeared to be a <insert space anomaly>. It has '
+      'proven to be sentient and has taken control of our ship. Thus far, all '
+      'efforts at communication have failed...',
   'A warship from the <insert hostile alien organization> has entered our '
-  'territory. It is currently speeding towards Earth. Thus far, all efforts at '
-  'peace have failed...',
+      'territory. It is currently speeding towards Earth. Thus far, all '
+      'efforts at peace have failed...',
   'The ship has been pulled into a <insert type of time distortion>. We are '
-  'observing the universe in the distant <past or future>. Thus far, all efforts '
-  'to return to our timeline have failed...'];
+      'observing the universe in the distant <past or future>. Thus far, all '
+      'efforts to return to our timeline have failed...'
+];
 
-QUILL.QuillStatic quillEditor;
+quill.QuillStatic quillEditor;
 Map<double, HtmlElement> logEntries;
 
 main() {
   // initialization
-  quillEditor = new QUILL.QuillStatic('#editor',
-      new QUILL.QuillOptionsStatic(theme:'snow', placeholder: prompt));
+  quillEditor = new quill.QuillStatic('#editor',
+      new quill.QuillOptionsStatic(theme: 'snow', placeholder: prompt));
 
   logEntries = new Map<double, HtmlElement>();
   loadPreviousEntries();
@@ -31,21 +32,20 @@ main() {
   document.getElementById('save').onClick.listen(saveLog);
   SelectElement foo = document.getElementById('templateSelect');
   foo.onChange.listen(useTemplate);
-
 }
 
 // Updates the content of the editor using a template.
 void useTemplate(Event _) {
-  SelectElement templateSelectElement = document.getElementById("templateSelect");
+  SelectElement templateSelectElement =
+      document.getElementById("templateSelect");
   int selectedIndex = templateSelectElement.selectedIndex;
 
   if (selectedIndex == 0) return;
 
   quillEditor.deleteText(0, quillEditor.getLength());
-  String templateText = templates[templateSelectElement.selectedIndex-1];
+  String templateText = templates[templateSelectElement.selectedIndex - 1];
   quillEditor.insertText(0, templateText, 'api');
 }
-
 
 // copy html elements from the editor view and return them inside a new
 // DivElement.
@@ -63,7 +63,7 @@ void saveLog(Event _) {
   DivElement logEntryElement = captureEditorView();
   appendToLog(calcStardate(), logEntryElement);
 
-  // clear the editor
+  // Clear the editor.
   quillEditor.deleteText(0, quillEditor.getLength());
 }
 
@@ -96,7 +96,7 @@ double calcStardate() {
   return now.year + secondsThisYear / secondsInAYear;
 }
 
-// Load all entries from the local storage.
+// Load all entries from local storage.
 void loadPreviousEntries() {
   Element logElement = document.getElementById('log');
   logElement.innerHtml = window.localStorage['log'] ?? '';
