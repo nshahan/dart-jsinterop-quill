@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<title>Captain's Log</title>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+  <head>
+    <title>Captain's Log</title>
+    <meta charset="utf-8">
+    <meta
+        name="viewport"
+        content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <link href="https://cdn.quilljs.com/1.0.4/quill.snow.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Material+Icons|Bungee+Hairline|Jura|Orbitron&effect=3d"
         rel="stylesheet">
     <link href="styles.css" rel="stylesheet">
-	</head>
-	<body>
-    <div id="content">
+  </head>
+  <body>
+    <main id="content">
       <h1 class="title font-effect-3d">Captain's Log</h1>
-      <div id="editor"></div>
+      <section id="editor"></section>
       <div class="buttons">
         <div class="select">
           <select id="templateSelect">
@@ -24,10 +26,10 @@
         </div>
         <button id="save">Save to Memory Banks</button>
       </div>
-      <div id="log"></div>
-    </div>
-	</body>
+      <section id="log"></section>
+    </main>
+  </body>
   <script src="https://cdn.quilljs.com/1.0.4/quill.js"></script>
   <script type="application/dart" src="main.dart"></script>
-	<script src="packages/browser/dart.js"></script>
+  <script src="packages/browser/dart.js"></script>
 </html>
