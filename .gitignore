@@ -7,6 +7,7 @@ pubspec.lock
 build/
 **/packages/
 web/gen
+web/packages
 
 doc/api/
 
