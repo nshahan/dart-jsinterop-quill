@@ -1,10 +1,82 @@
+html {
+  background: #222;
+  color: white;
+  font-family: 'Jura', sans-serif;
+}
+
+h1.title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 4em;
+}
+
+h2.stardate {
+  font-family: 'Bungee Hairline', cursive;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+select {
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: inherit;
+  border: none;
+  color: inherit;
+  font-size: inherit;
+  padding: 5px;
+}
+
+select:focus {
+  outline: none;
+}
+
+div.select {
+  border-bottom: 1px solid gray;
+  display: inline-block;
+  height: 100%;
+}
+
+div.select::after {
+  font-family: 'Material Icons';
+  content: '\E5C5';
+}
+
+button {
+  background-color: #06c;
+  border-color: #06c;
+  border-radius: 5px;
+  font-family: inherit;
+  font-size: 1.1em;
+  margin: 5px;
+  padding: 20px;
+}
+
+#editor .ql-editor.ql-blank::before {
+  color: white;
+}
+
+.ql-toolbar .ql-stroke {
+  stroke: white;
+}
+
+.ql-toolbar .ql-fill {
+  fill: white;
+}
+
+.ql-toolbar.ql-snow .ql-picker-label {
+  color: white;
+}
 
 #content {
-  padding-left: 30%;
-  padding-right: 30%;
+  padding-left: 20%;
+  padding-right: 20%;
 
 }
 
 #editor {
   height: 20em;
+  font-size: 1.1em;
 }

@@ -69,8 +69,9 @@ void displayLogEntry(double stardate, HtmlElement logEntryElement) {
   }
 
   logElement.insertAdjacentElement('afterBegin', logEntryElement);
-  HtmlElement stardateElement = new HeadingElement.h1();
-  stardateElement.text = 'Stardate: $stardate';
+  var stardateElement = new HeadingElement.h2()
+    ..text = 'Stardate: $stardate'
+    ..classes.add('stardate');
   logElement.insertAdjacentElement('afterBegin', stardateElement);
 }
 
