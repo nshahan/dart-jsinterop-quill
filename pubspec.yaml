@@ -1,7 +1,8 @@
-name: demo
+name: captains_log
 version: 0.0.1
 description: >
-  WYSIWYG Markdown editor in JS with Dart wrapper
+  A starship captain's log with a WYSIWYG editor. Uses an existing JavaScript
+  library with the new Dart JS-interop.
 
 environment:
   sdk: '>=1.17.0 <2.0.0'

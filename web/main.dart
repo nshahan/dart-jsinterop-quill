@@ -19,12 +19,13 @@ final List<String> _templates = [
 
 quill.QuillStatic quillEditor;
 Map<double, HtmlElement> logEntries;
+HtmlElement logElement;
 
 main() {
   // initialization
   quillEditor = new quill.QuillStatic('#editor',
       new quill.QuillOptionsStatic(theme: 'snow', placeholder: _prompt));
-
+  logElement = document.getElementById('log');
   logEntries = new Map<double, HtmlElement>();
   loadPreviousEntries();
 
@@ -32,6 +33,15 @@ main() {
   document.getElementById('save').onClick.listen(saveLog);
   document.getElementById('templateSelect') as SelectElement
     ..onChange.listen(useTemplate);
+}
+
+// This function will be removed. It is just holding some example dart that
+// should be executed in the console.
+temporary() {
+  document.body.style
+    ..backgroundImage = "url(https://cdn.spacetelescope.org/archives/images/wallpaper2/heic0601a.jpg)"
+    ..setProperty('background-size', '100% 100%')
+    ..setProperty('background-attachment', 'fixed');
 }
 
 /// Capture entry in editor, save to local storage and display in log.
@@ -61,7 +71,7 @@ HtmlElement captureEditorView() {
 }
 
 void displayLogEntry(double stardate, HtmlElement logEntryElement) {
-  Element logElement = document.getElementById('log');
+//  var logElement = document.getElementById('log');
 
   if (logElement.children.isNotEmpty) {
     logElement.insertAdjacentElement('afterBegin', new HRElement());
@@ -76,7 +86,7 @@ void displayLogEntry(double stardate, HtmlElement logEntryElement) {
 
 /// Load all log entries from browser local storage.
 void loadPreviousEntries() {
-  Element logElement = document.getElementById('log');
+//  Element logElement = document.getElementById('log');
   logElement.innerHtml = window.localStorage['log'] ?? '';
 
   List<String> keys = window.localStorage.keys.toList();
@@ -85,8 +95,8 @@ void loadPreviousEntries() {
     var entryElement = new DivElement()
       ..innerHtml = window.localStorage[key];
     logEntries[double.parse(key)] = entryElement;
-    displayLogEntry(double.parse(key), entryElement);
   }
+  updateDisplay();
 }
 
 /// Save the log entry that is currently in the editor.
@@ -98,10 +108,19 @@ void saveLog(Event _) {
   quillEditor.deleteText(0, quillEditor.getLength());
 }
 
+void updateDisplay() {
+  logElement.innerHtml = '';
+  List<double> keys = logEntries.keys.toList();
+  keys.sort();
+  for (double key in keys) {
+    displayLogEntry(key, logEntries[key]);
+  }
+}
+
 /// Updates the content of the editor using the selected template.
 void useTemplate(Event _) {
   SelectElement templateSelectElement =
-      document.getElementById('templateSelect');
+  document.getElementById('templateSelect');
   int selectedIndex = templateSelectElement.selectedIndex;
 
   if (selectedIndex == 0) return;

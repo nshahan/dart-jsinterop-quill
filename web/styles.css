@@ -1,3 +1,8 @@
+body {
+  padding: 0em;
+  margin: 0em;
+}
+
 html {
   background: #222;
   color: white;
@@ -7,6 +12,8 @@ html {
 h1.title {
   font-family: 'Orbitron', sans-serif;
   font-size: 4em;
+  margin-top: 0px;
+  padding: 0.67em;
 }
 
 h2.stardate {
@@ -82,9 +89,12 @@ button {
 }
 
 #content {
-  padding-left: 20%;
-  padding-right: 20%;
-
+  margin-left: 20%;
+  margin-right: 20%;
+  padding-left: 2%;
+  padding-right: 2%;
+  background: rgba(22, 22, 22, 0.8);
+  background-clip: padding-box;
 }
 
 #editor {
