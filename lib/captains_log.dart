@@ -19,9 +19,9 @@ final List<String> _templates = [
 
 quill.QuillStatic quillEditor;
 Map<double, HtmlElement> logEntries;
-HtmlElement logElement;
+Element logElement;
 
-init() {
+void init() {
   // initialization
   quillEditor = new quill.QuillStatic('#editor',
       new quill.QuillOptionsStatic(theme: 'snow', placeholder: _prompt));
@@ -33,15 +33,6 @@ init() {
   document.getElementById('save').onClick.listen(saveLog);
   document.getElementById('templateSelect') as SelectElement
     ..onChange.listen(useTemplate);
-}
-
-// This function will be removed. It is just holding some example dart that
-// should be executed in the console.
-temporary() {
-  document.body.style
-    ..backgroundImage = "url(https://cdn.spacetelescope.org/archives/images/wallpaper2/heic0601a.jpg)"
-    ..setProperty('background-size', '100% 100%')
-    ..setProperty('background-attachment', 'fixed');
 }
 
 /// Capture entry in editor, save to local storage and display in log.
@@ -62,17 +53,15 @@ double calculateStardate() {
 /// Copy html elements from the editor view and return them inside a new
 /// DivElement.
 HtmlElement captureEditorView() {
-  Element contentElement = document.getElementById('editor').firstChild;
+  Element contentElement = document.getElementById('editor').children.first;
 
-  var logEntryElement = new DivElement()
-    ..innerHtml = contentElement.innerHtml;
+  var logEntryElement = new DivElement()..innerHtml = contentElement.innerHtml;
 
   return logEntryElement;
 }
 
+/// Update the dom with the provided log entry.
 void displayLogEntry(double stardate, HtmlElement logEntryElement) {
-//  var logElement = document.getElementById('log');
-
   if (logElement.children.isNotEmpty) {
     logElement.insertAdjacentElement('afterBegin', new HRElement());
   }
@@ -86,14 +75,10 @@ void displayLogEntry(double stardate, HtmlElement logEntryElement) {
 
 /// Load all log entries from browser local storage.
 void loadPreviousEntries() {
-//  Element logElement = document.getElementById('log');
-  logElement.innerHtml = window.localStorage['log'] ?? '';
-
   List<String> keys = window.localStorage.keys.toList();
   keys.sort();
   for (String key in keys) {
-    var entryElement = new DivElement()
-      ..innerHtml = window.localStorage[key];
+    var entryElement = new DivElement()..innerHtml = window.localStorage[key];
     logEntries[double.parse(key)] = entryElement;
   }
   updateDisplay();
@@ -101,26 +86,27 @@ void loadPreviousEntries() {
 
 /// Save the log entry that is currently in the editor.
 void saveLog(Event _) {
-  DivElement logEntryElement = captureEditorView();
+  HtmlElement logEntryElement = captureEditorView();
   appendToLog(calculateStardate(), logEntryElement);
 
   // Clear the editor.
   quillEditor.deleteText(0, quillEditor.getLength());
 }
 
+/// Update the dom to show all current log entries.
 void updateDisplay() {
   logElement.innerHtml = '';
-  List<double> keys = logEntries.keys.toList();
-  keys.sort();
-  for (double key in keys) {
-    displayLogEntry(key, logEntries[key]);
+  List<double> starDates = logEntries.keys.toList();
+  starDates.sort();
+  for (double starDate in starDates) {
+    displayLogEntry(starDate, logEntries[starDate]);
   }
 }
 
 /// Updates the content of the editor using the selected template.
 void useTemplate(Event _) {
   SelectElement templateSelectElement =
-  document.getElementById('templateSelect');
+      document.getElementById('templateSelect') as SelectElement;
   int selectedIndex = templateSelectElement.selectedIndex;
 
   if (selectedIndex == 0) return;
